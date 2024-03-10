@@ -1,0 +1,77 @@
+<html>
+  <body></body>
+</html>
+<script>
+  // Body container
+  const bodyContainer = document.getElementsByTagName("body")[0];
+  //   Container div added
+  const mainContainerDiv = document.createElement("div");
+  //   Container appended to body
+  bodyContainer.appendChild(mainContainerDiv);
+  //   Added height to container
+  mainContainerDiv.style.height = "100vh";
+
+  const contentWrapper = document.createElement("div");
+  mainContainerDiv.appendChild(contentWrapper);
+  // Content wrapper styles
+  contentWrapper.style.fontSize = "48px";
+  contentWrapper.style.fontFamily = "sans-serif";
+  contentWrapper.style.fontWeight = "600";
+  contentWrapper.style.textAlign = "center";
+  contentWrapper.style.position = "relative";
+  contentWrapper.style.top = "50%";
+
+  //   Title styles
+  const title = document.createElement("h1");
+  title.id = "appTitle";
+  title.innerHTML = "Color Flipper";
+
+  //   Flip button styles
+  const flipBtn = document.createElement("button");
+  flipBtn.style.marginTop = "10px";
+  flipBtn.style.padding = "10px 40px";
+  flipBtn.innerHTML = "Flip Colors!";
+  flipBtn.style.borderRadius = "20px";
+  flipBtn.style.borderWidth = "0";
+  flipBtn.style.boxShadow = "-4px 5px 8px";
+  flipBtn.style.fontSize = "30px";
+  flipBtn.style.fontWeight = "bold";
+  flipBtn.id = "flip";
+
+  //   Appending button and title
+  contentWrapper.appendChild(title);
+  contentWrapper.appendChild(flipBtn);
+
+  //   Handler for click functionality of the button, creates a random hex color
+  document.getElementById("flip").addEventListener("click", function () {
+    console.log(this);
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+
+    document.body.style.backgroundColor = color;
+
+    // Check luminance
+    checkLuminance(color);
+  });
+
+  // Method to check the luminance of the title text
+  const checkLuminance = (color) => {
+    var hex = color.substring(1); // remove #
+    var rgb = parseInt(hex, 16); // convert hex to decimal
+    var r = (rgb >> 16) & 0xff; // extract red
+    var g = (rgb >> 8) & 0xff; // extract green
+    var b = (rgb >> 0) & 0xff; // extract blue
+
+    var luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+    if (luminance < 40) {
+      appTitle.style.color = "white";
+    } else {
+      appTitle.style.color = "black";
+    }
+  };
+</script>
