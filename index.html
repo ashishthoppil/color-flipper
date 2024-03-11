@@ -44,7 +44,6 @@
 
   //   Handler for click functionality of the button, creates a random hex color
   document.getElementById("flip").addEventListener("click", function () {
-    console.log(this);
     const letters = "0123456789ABCDEF";
     let color = "#";
 
@@ -68,7 +67,7 @@
 
     var luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
-    if (luminance < 40) {
+    if (luminance < 80) {
       appTitle.style.color = "white";
     } else {
       appTitle.style.color = "black";
